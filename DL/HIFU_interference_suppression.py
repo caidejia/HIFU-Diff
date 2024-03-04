@@ -6,7 +6,7 @@ import time
 import numpy as np
 import torch
 import scipy.io as sio
-from DP import Diffuser
+from HIFU_Diff import Diffuser
 from dataload import HF_n_pre, HF_n_PreWithoutLabel
 from init_hparams import load_predict_hparams, hparams, init_dataset, init_model
 from ssim import SSIM

@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader, DistributedSampler
 from tqdm import tqdm
 import wandb
 import torch.distributed as dist
-from DP import Diffuser
+from HIFU_Diff import Diffuser
 from evaluate_HIFU import evaluate_HIFU
 from evaluate_rrdb import evaluate_RRDB
 from init_hparams import *

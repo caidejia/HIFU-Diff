@@ -5,7 +5,7 @@ import numpy as np
 from tqdm import tqdm
 from torch.utils.data import DataLoader
 
-from DP import Diffuser
+from HIFU_Diff import Diffuser
 from init_hparams import *
 
 

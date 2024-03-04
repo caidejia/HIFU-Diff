@@ -7,7 +7,7 @@ from torch import nn
 from torch.optim import lr_scheduler, AdamW
 
 from dataload import HF_n, HF_V2, HF_R, HF_23c
-from DP import HFNet, RRDBNet
+from HIFU_Diff import HFNet, RRDBNet
 from Unet import UNet_HIFU_ori
 from FusNet import FusNet
 

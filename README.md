@@ -16,11 +16,9 @@ If you want to speed up inference on a dataset, you can execute the HIFU_interfe
 
 Please be aware that for the script to function properly, it should be executed alongside the config.yaml file located within the same directory.The root directory for the data slated for prediction should be specified using the "dir_val_f" or "dir_val_s" fields within the config.yaml file. Furthermore, adjust the other parameters under the "predict" section of the config.yaml file to tailor the prediction behavior of the model. This includes settings for multi-angle prediction, the deployment of multiple GPUs, the use of ddim acceleration, and other related configuration options.
 
-metric
-
 ## Ultrasound imaging
 
-We can use the "Imaging" script for image reconstruction, allowing us to process RF channel data directly for reconstructing images, which includes both single-angle and multiple-angle composite imaging. For single-angle imaging, the data should be formatted as (number of time sequences, number of channels). In the case of multiple-angle composite imaging, the format should be (number of time sequences, number of channels, number of angles). Furthermore, to perform multiple-angle composite imaging, we can concatenate single-angle .mat data using the "connectdata_MA" script to create multi-angle data sets. It is crucial to ensure that the angles of the data being concatenated are sequential.
+We can use the "Imaging.m" script for image reconstruction, allowing us to process RF channel data directly for reconstructing images, which includes both single-angle and multiple-angle composite imaging. For single-angle imaging, the data should be formatted as (number of time sequences, number of channels). In the case of multiple-angle composite imaging, the format should be (number of time sequences, number of channels, number of angles). Additionally, to perform multi-angle composite imaging, we can manually combine single-angle data into multi-angle datasets using the "connectdata_MA.m" script. It is crucial to ensure that the angles of the data being concatenated are sequential.
 
 ## Introduction to File Structure
 

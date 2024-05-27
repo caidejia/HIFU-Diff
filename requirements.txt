@@ -1,0 +1,16 @@
+nvidia-cudnn-cu11==8.5.0.96
+omegaconf==2.3.0
+opencv-python==4.9.0.80
+opencv-python-headless==4.9.0.80
+openpyxl==3.0.10
+pathtools==0.1.2
+Pillow==9.2.0
+tensorboard==2.14.0
+tensorboard-data-server==0.7.1
+thop==0.1.1.post2209072238
+torch==2.0.1
+torchaudio==2.0.2
+torchmetrics==0.6.0
+torchvision==0.15.2
+wandb==0.15.10
+webencodings==0.5.1

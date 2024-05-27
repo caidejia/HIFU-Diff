@@ -1,0 +1,57 @@
+# CUDA_VISIBLE_DEVICES="0,1" python -m torch.distributed.run --nproc_per_node 2 train_main.py
+# CUDA_VISIBLE_DEVICES="0,1" python -m torch.distributed.run --nproc_per_node 2 predict.py -m=2000 -ts=150
+project_name: TEST #wandb project name
+
+dataset:
+  name: ori_randomcrop #project name
+  server: False #train on server
+  dir_train_f: #local path for train
+  dir_val_f: #local for validate 
+  dir_train_s: #server path for train
+  dir_val_s: #server path for validate
+  randomcrop:
+    size: 1024|128  #(2944,128)
+
+model:
+  name: ddpm_n
+  load_rrdb:
+    flag: True
+    rrdb_pth:  ./pretrained/rrdb_total.pth
+  load_pth:
+    flag: False
+    pretrained_pth: ./checkpoints/HIFU_Diff.pth
+  unet_dim_mults: 1|2|4|8
+  timestep: 200
+  beta_schedule: linear #cosine
+
+
+
+train:
+  lr: 0.0003 #0.0003
+  batch_size: 8 #RRDB=10 DDPM=6 Unet=20
+  epochs: 2000
+  amp: True
+  checkpoint_bg: 0
+  multi_gpu: True
+  loss: L2 #DDPM 需要改MSE
+  optimizer: AdamW
+
+  scheduler:
+    name: CosineAnnealingLR
+    CosineAnnealingLR:
+      max_epoch: epochs #epochs or number
+    StepLR:
+      step_size: 100
+      gamma: 0.5
+    ReduceLROnPlateau:
+      patience: 5
+      factor: 0.1
+
+predict:
+  ddpmMode: True
+  mode: 1 # 1 for normal, 2 for dataset, 3 for dataset without label
+  mgpu: False
+  MA_predict: True
+  use_ddim: True
+  predict_checkpoints: ./checkpoints/ 
+  path_save: #your path

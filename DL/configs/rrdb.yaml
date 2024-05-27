@@ -1,0 +1,55 @@
+# CUDA_VISIBLE_DEVICES="0,1,2,3" python -m torch.distributed.run --nproc_per_node 4 train_main.py
+project_name: TEST #wandb project name
+
+dataset:
+  name: ori #data preprocessing method ：ori|ori_randomcrop|ori_23c|fft2Dcond  
+  server: False #train on server
+  dir_train_f: #local path for train
+  dir_val_f: #local for validate 
+  dir_train_s: #server path for train
+  dir_val_s: #server path for validate
+  randomcrop:
+    size: 1024|128  #(2944,128)
+
+model:
+  name: rrdb
+  load_rrdb:
+    flag: False
+    rrdb_pth: /
+  load_pth:
+    flag: False
+    pretrained_pth: /
+  unet_dim_mults: 1|2|4|8
+  timestep: 200
+  beta_schedule: cosine
+
+
+train:
+  lr: 0.0003 #0.0003
+  batch_size: 10 #RRDB=10 DDPM=6 Unet=20
+  epochs: 1000
+  amp: True
+  checkpoint_bg: 0
+  multi_gpu: True
+  loss: L1 #DDPM 需要改MSE
+  optimizer: AdamW
+
+  scheduler:
+    name: CosineAnnealingLR
+    CosineAnnealingLR:
+      max_epoch: epochs #epochs or number
+    StepLR:
+      step_size: 100
+      gamma: 0.5
+    ReduceLROnPlateau:
+      patience: 5
+      factor: 0.1
+
+predict:
+  ddpmMode: False
+  mode: 1 # 1 for normal, 2 for dataset, 3 for dataset without label
+  mgpu: False
+  MA_predict: True
+  use_ddim: True
+  predict_checkpoints: ./checkpoints/ 
+  path_save: #your path

@@ -8,11 +8,11 @@ The script HIFU_interference_suppression.py offers a diverse range of methods fo
 
 You can execute the HIFU_interference_suppression.py script on a single GPU as follows:
 
-`python HIFU_interference_suppression.py -m=HIFU_Diff -ts_ddim=5 -r=1`  
+`python HIFU_interference_suppression.py -m=HIFU_Diff -dits=5 -r=1`  
 
 If you want to speed up inference on a dataset, you can execute the HIFU_interference_suppression.py script on multiple GPUs as follows:
 
-`CUDA_VISIBLE_DEVICES="0,1" python -m torch.distributed.run --nproc_per_node 2 HIFU_interference_suppression.py -m=HIFU_Diff -ts_ddim=5`
+`CUDA_VISIBLE_DEVICES="0,1" python -m torch.distributed.run --nproc_per_node 2 HIFU_interference_suppression.py -m=HIFU_Diff -dits=5`
 
 Please be aware that for the script to function properly, it should be executed alongside the config.yaml file located within the same directory.The root directory for the data slated for prediction should be specified using the "dir_val_f" or "dir_val_s" fields within the config.yaml file. Furthermore, adjust the other parameters under the "predict" section of the config.yaml file to tailor the prediction behavior of the model. This includes settings for multi-angle prediction, the deployment of multiple GPUs, the use of ddim acceleration, and other related configuration options.
 
